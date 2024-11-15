@@ -1,10 +1,9 @@
-# computer-science
-lections + labs + additional materials
+# informatics
+lections + labs
 
-*  this repository contains files about computer science (cs)
-*  lecture folders contain lecture materials + presentations
+*  this repository contains files about informatics 
+*  lecture folders contain lecture materials
 *  lab folders contain tasks + programms + reports
-*  additional materials - intersting links, articles, courses, books
-*  all files are divided into courses and each course is divided into semesters
+*  the most important link in your life: https://xn--f1arg.xn--80asehdb/
   
-  ** maybe there will be a folder with exam questions and my answers.. 
+** maybe there will be a folder with exam questions and my answers.. 
