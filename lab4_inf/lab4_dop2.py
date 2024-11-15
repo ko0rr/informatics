@@ -20,7 +20,7 @@ def main2(xml_f, json_f):
     to_be_listed = []
     s = ''
 
-    with open(f"{xml_f}", "r", encoding="utf-8") as xml:
+    with open(xml_f, "r", encoding="utf-8") as xml:
         lines.append('{\n')
         for line in xml.readlines():
             close = False
@@ -83,11 +83,10 @@ def main2(xml_f, json_f):
             if ']' in lines[i] and lines[i][lines[i].find('}'):].count('\t') == start:
                 break
 
-    with open(f"{json_f}", "w", encoding="utf-8") as json:
+    with open(json_f, "w", encoding="utf-8") as json:
         for i in lines:
             json.write(i)
         print('converted')
 
 
-main2('scheduleXML_monday.xml', 'scheduleJSON_monday.json')
-main2('scheduleXML_thursday.xml', 'scheduleJSON_thursday.json')
+main2('scheduleXML_thursday.xml', 'dop2JSON.json')
