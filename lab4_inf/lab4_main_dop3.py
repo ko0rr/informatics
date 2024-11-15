@@ -18,7 +18,7 @@ def remove_duplicate(data):
         data.append(key)
 
 
-def main03():
+def main03(xml_f, json_f):
     stack = []  # вложенные теги
     lines = []  # строки json
     to_be_listed = []
@@ -27,7 +27,7 @@ def main03():
 
     s = '' # последний тег
 
-    with open("scheduleXML_thursday.xml", "r", encoding="utf-8") as xml:
+    with open(xml_f, "r", encoding="utf-8") as xml:
         lines.append('{\n')     # открывает блок кода в json
         for line in xml.readlines():
             if line.strip() == '<?xml version="1.0" encoding="UTF-8" ?>':   # пропускаем первую строку тк она не конверируется в json
@@ -67,7 +67,7 @@ def main03():
             if sp in lines[i] and first:
                 tab_start = tab
                 lines[i] = lines[i].replace('{', '[\n' + ('\t' * (tab + 1)) + '{') # если тег вложен - преобразовывается квадратными скобками и отступами
-                first = False
+                first = False                                                      # расстановка открывающих скобок
             elif sp in lines[i]:
                 lines[i] = lines[i].replace(f'"{sp}": ', '')
 
@@ -82,13 +82,16 @@ def main03():
                 continue
             if tab:
                 lines[i] = '\t' + lines[i]
-            if ']' in lines[i] and lines[i][lines[i].find('}'):].count('\t') == tab_start:
+            if ']' in lines[i] and lines[i][lines[i].find('}'):].count('\t') == tab_start:    # расстановка закрыающих скобок
                 break
 
-    with open("scheduleJSON_thursday.json", "w", encoding="utf-8") as json:
+    with open(json_f, "w", encoding="utf-8") as json:
         for i in lines:
             json.write(i)
-        print('converted into scheduleJSON_thursday.json file')
+        #print('converted into scheduleJSON_thursday.json file')
 
 
-main03()
+
+main03('scheduleXML_thursday.xml', 'scheduleJSON_thursday.json') #основное задание
+main03('scheduleXML_monday.xml', 'schedule1JSON_monday.json')   #доп3
+main03('scheduleXML_thursday.xml', 'schedule2JSON_thursday.json')   #доп3
