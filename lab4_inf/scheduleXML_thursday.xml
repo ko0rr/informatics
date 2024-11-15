@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<root>
+    <schedule>
+        <pair>
+            <title>История русской культуры в контексте мировой культуры</title>
+            <type>Практика</type>
+            <time>
+                <start>10:00</start>
+                <end>11:30</end>
+            </time>
+            <format>fulltime</format>
+            <place>
+                <address>Кронверкский пр., д.49, лит.А</address>
+                <classroom>Ауд. 2433</classroom>
+            </place>
+            <teacher>
+                <surname>Жиркова</surname>
+                <name>Галина</name>
+                <lastname>Петровна</lastname>
+            </teacher>
+        </pair>
+        <pair>
+            <title>История русской культуры в контексте мировой культуры</title>
+            <type>Лекция</type>
+            <time>
+                <start>11:40</start>
+                <end>13:10</end>
+            </time>
+            <format>fulltime</format>
+            <place>
+                <address>Кронверкский пр., д.49, лит.А</address>
+                <classroom>Ауд. 1404</classroom>
+            </place>
+            <teacher>
+                <surname>Жиркова</surname>
+                <name>Галина</name>
+                <lastname>Петровна</lastname>
+            </teacher>
+        </pair>
+    </schedule>
+</root>
