@@ -5,7 +5,7 @@ from lab4_dop1 import main1
 from lab4_dop2 import main2
 
 
-def test():
+def time_test():
     start_03 = time()
 
     for i in range(100):
@@ -22,7 +22,10 @@ def test():
         main2('scheduleXML_thursday.xml', 'scheduleJSON_thursday.json')
     end_2 = time() - start_2
 
-    print(end_03, end_1, end_2)
+    print(f"Основное задание и доп3: {end_03}")
+    print(f"Доп1: {end_1}")
+    print(f"Доп2: {end_2}")
 
 
-test()
+
+time_test()
