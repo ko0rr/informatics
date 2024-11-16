@@ -3,9 +3,9 @@
 
 
 def remove_duplicate(data):
-    """функция проверяет, существует ли текущий ключ
+    """ функция проверяет, существует ли текущий ключ
         finally - count = element:  количество раз, к-е он встречается в data
-        если ключа нет - добавляем его"""
+        если ключа нет - добавляем его """
 
     count = {}
     for element in data:
@@ -18,18 +18,66 @@ def remove_duplicate(data):
         data.append(key)
 
 
+def validate_xml_lines(array):
+        """ Функция проверяет, соответствует ли входной файл формату XML """
+    opened_tags = []     # Стек для отслеживания открытых тегов
+
+    for i, line in enumerate(array):
+        stripped_line = line.strip()    # Убираем лишние пробелы
+
+        # Разбиваем строку на теги
+        while "<" in stripped_line:
+            start_index = stripped_line.find("<")
+            end_index = stripped_line.find(">", start_index)
+
+            if end_index == -1:    # -1 когда не найден элемент
+                print(f"Ошибка: Незакрытый тег: {line.strip()}")
+                return False
+
+            tag = stripped_line[start_index + 1:end_index].strip()
+            stripped_line = stripped_line[end_index + 1:]  # Оставляем остаток строки
+
+            # Определяем тип тега
+            if tag.startswith("?") or tag.startswith("!"):  # Пропускаем служебные теги
+                continue
+            elif tag.startswith("/"):  # Закрывающий тег
+                tag_name = tag[1:]
+                if not opened_tags or opened_tags[-1] != tag_name:
+                    print(
+                        f"ошибка: тег в строке {i + 1}: </{tag_name}> не соответствует <{opened_tags[-1] if opened_tags else 'нет открытого тега'}>")
+                    return False
+                opened_tags.pop()
+            elif tag.endswith("/"):  # Самозакрывающийся тег
+                continue
+            else:  # Открывающий тег
+                tag_name = tag.split()[0]
+                opened_tags.append(tag_name)
+
+    # Проверяем незакрытые теги
+    if opened_tags:
+        print(f"ошибка: незакрытые теги: {opened_tags}")
+        return False
+    else:
+        print("всё оке")
+        return True
+
+
 def main03(xml_f, json_f):
     stack = []  # вложенные теги
     lines = []  # строки json
     to_be_listed = []
     """ если текущий тег уже встречался -> to_be_listed
         для обработки вложенности """
-
+    #array = xml_f.readlines()
     s = '' # последний тег
 
     with open(xml_f, "r", encoding="utf-8") as xml:
+        array = xml.readlines()
         lines.append('{\n')     # открывает блок кода в json
-        for line in xml.readlines():
+        for line in array:
+            if not validate_xml_lines(array):
+                print('некорректный xml')
+                return
             if line.strip() == '<?xml version="1.0" encoding="UTF-8" ?>':   # пропускаем первую строку тк она не конверируется в json
                 continue
             tag = line[line.find('<') + 1:line.find('>')]  # выделяем тег(срез строки)
@@ -82,7 +130,7 @@ def main03(xml_f, json_f):
                 continue
             if tab:
                 lines[i] = '\t' + lines[i]
-            if ']' in lines[i] and lines[i][lines[i].find('}'):].count('\t') == tab_start:    # расстановка закрыающих скобок
+            if ']' in lines[i] and lines[i][lines[i].find('}'):].count('\t') == tab_start:    # расстановка закрыающих строк
                 break
 
     with open(json_f, "w", encoding="utf-8") as json:
