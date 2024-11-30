@@ -18,7 +18,7 @@ def remove_duplicate(data):
         data.append(key)
 
 
-def validate_xml_lines(array):
+def isvalid_xml(array):
         """ Функция проверяет, соответствует ли входной файл формату XML """
     opened_tags = []     # Стек для отслеживания открытых тегов
 
@@ -43,8 +43,7 @@ def validate_xml_lines(array):
             elif tag.startswith("/"):  # Закрывающий тег
                 tag_name = tag[1:]
                 if not opened_tags or opened_tags[-1] != tag_name:
-                    print(
-                        f"ошибка: тег в строке {i + 1}: </{tag_name}> не соответствует <{opened_tags[-1] if opened_tags else 'нет открытого тега'}>")
+                    print(f"ошибка: тег в строке {i + 1}: </{tag_name}> не соответствует <{opened_tags[-1] if opened_tags else 'нет открытого тега'}>")
                     return False
                 opened_tags.pop()
             elif tag.endswith("/"):  # Самозакрывающийся тег
@@ -75,7 +74,7 @@ def main03(xml_f, json_f):
         array = xml.readlines()
         lines.append('{\n')     # открывает блок кода в json
         for line in array:
-            if not validate_xml_lines(array):
+            if not isvalid_xml(array):
                 print('некорректный xml')
                 return
             if line.strip() == '<?xml version="1.0" encoding="UTF-8" ?>':   # пропускаем первую строку тк она не конверируется в json
